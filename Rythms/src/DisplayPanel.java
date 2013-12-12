@@ -39,7 +39,7 @@ public class DisplayPanel extends JPanel implements MouseListener
 		addMouseListener(this);
 		circles = new ArrayList();
 		//testingSong = new ReadFile("C:/Users/" + System.getProperty("user.name") + "/Desktop/test.txt");
-		testingSong = new ReadFile("E:/OGPC-Workspace/Rythms/data/test.txt");
+		testingSong = new ReadFile("C:/Users/" + System.getProperty("user.name") + "/Documents/GitHub/RythmOGPC/Rythms/data/test.txt");
 		window = frame;
 		opacity = 0.0f;
 		
@@ -143,15 +143,15 @@ public class DisplayPanel extends JPanel implements MouseListener
             	duration++;
             	repaint();
             }
-        }, 5, 2); //delay in ms, period in ms
+        }, 50, 10); //delay in ms, period in ms
 	}
-
-	public void mouseClicked(MouseEvent arg0) 
+	
+	public void mousePressed(MouseEvent arg0) 
 	{
 		PointerInfo p = MouseInfo.getPointerInfo();
         Point point = new Point(p.getLocation());
         SwingUtilities.convertPointFromScreen(point, this);
-        //System.out.println("Points: " + points);
+        System.out.println("Points: " + points);
         
         for (int i = 0; i < circles.size(); i++)
         {
@@ -163,8 +163,8 @@ public class DisplayPanel extends JPanel implements MouseListener
         }
 	}
 
+	public void mouseClicked(MouseEvent arg0) {}
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
-	public void mousePressed(MouseEvent arg0) {}
 	public void mouseReleased(MouseEvent arg0) {}
 }

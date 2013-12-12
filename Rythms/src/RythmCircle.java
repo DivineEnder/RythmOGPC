@@ -35,7 +35,7 @@ public class RythmCircle
 		
 		if (clickable)
 		{
-			if (clickPoint.x <= (x + width/2) && clickPoint.x >= (x + width/2) && clickPoint.y <= (y + height/2) && clickPoint.y >= (y + height/2))
+			if (Math.sqrt(Math.pow(clickPoint.x - x, 2) + Math.pow(clickPoint.y - y, 2)) < 25)
 			{
 				inside = true;
 			}
