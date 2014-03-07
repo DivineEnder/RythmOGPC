@@ -2,37 +2,37 @@
 |                           Bug list   			       |
 |							       |
 |DO NOT DELETE PAST BUGS (we can use the list for show at OGPC)|
-|       When commiting include bugs fixed and bugs found       |
+|       When committing include bugs fixed and bugs found       |
 |--------------------------------------------------------------|
 please follow the format below
 Bug # - Number for the bug. In the format of 0_0_0 (zeros replaces from left to right with numbers up to 9) Ex. 0_0_1
 Version - Version that bug can be found in. Will be the name then number. Ex. David V1.0
 What - Describe the bug and the circumstances that it occurs under.
 Cause - Describe the most likely cause of the bug. If you do not know then say unknown.
-Fix - Descirbe a way that we could fix this bug. If you do not know then say unknown.
+Fix - Describe a way that we could fix this bug. If you do not know then say unknown.
 Priority - 4 priorities: Immediate (game breaking, should be worked on before other game mechanics), High (big, try and find a fix quickly), Medium (it is okay if we leave it for a bit), Low (if we have extra time):
-Progress - What if anything has been done to solve this bug. What has been tryed and failed. What worked. Temporary fixes. If no progress then say None, if fixed then simply put fixed and describe how.
+Progress - What if anything has been done to solve this bug. What has been tried and failed. What worked. Temporary fixes. If no progress then say None, if fixed then simply put fixed and describe how.
 
 Bug 0_0_1
 Version: David V1.0
-What: Click sometimes do not register at all or do not register as inside the rythm circles.
+What: Click sometimes do not register at all or do not register as inside the rhythm circles.
 Cause: Most likely caused by the mouse pressed event being too slow to handle checking inside of the duration. Either that or some combination of the mouse pressed event and the checking action that occurs checking at opposite or not at the correct times.
 Fix: Not quite sure how to fix. Check for fix on google as to speed of mouse pressed event or understand more how timers work.
-Priority: Immediate. Breaks game, because no points or rythm.
-Progress: None.
+Priority: Immediate. Breaks game, because no points or rhythm.
+Progress: The game was ported the slick graphics library so this bug is no longer applicable.
 
 Bug 0_0_2
 Version: David V1.0
 What: Timer reacting differently on different computers. Creates faster or slower songs depending on the computer. Tested on schools and home computer, home much faster.
-Cause: Most likely timer relys on processing power, creating different speeds on different computers.
+Cause: Most likely timer relies on processing power, creating different speeds on different computers.
 Fix: Add a cap to how fast the time goes or add a certain speed at which the timer can go at. Not sure how, google will be needed.
 Priority: High. Close to medium, but if we all want to work on it, it will need to work the same on all computers.
-Progress: None.
+Progress: The game was ported the slick graphics library so this bug is no longer applicable.
 
 Bug 0_0_3
 Version: David V1.0 (Note: Only seen on school computers so far)
 What: Flickering screen. Screen will flicker to something else, probably whatever is behind the game.
 Cause: Most likely repainting too quickly and so flickers every once in a while when it moves too quickly.
-Fix: Add an fps cap, goes along with figuring out how the timer works and caping the speed at which the timer can go.
+Fix: Add an fps cap, goes along with figuring out how the timer works and capping the speed at which the timer can go.
 Priority: Medium. I have not seen it at home so it may be on only some computers. Might also fix itself with bug 0_0_2.
-Progress: None.
+Progress: The game was ported the slick graphics library so this bug is no longer applicable.
