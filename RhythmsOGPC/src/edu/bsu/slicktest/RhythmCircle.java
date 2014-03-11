@@ -1,11 +1,7 @@
 package edu.bsu.slicktest;
-
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Point;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.ShapeFill;
-import org.newdawn.slick.geom.Circle;
 
 public class RhythmCircle
 {
@@ -15,8 +11,10 @@ public class RhythmCircle
 	int x;
 	//Creates a variable for the y position of the circle on the screen
 	int y;
-	//Creates a static variable for the radius of the rhythm circles (NOTE::Really only needed so it can be referenced easily and not changed easily)
-	static int radius = 25;
+	//Creates a static variable for the width of the rhythm circles (NOTE::Really only needed so it can be referenced easily and not changed easily)
+	static int width = 50;
+	//Creates a static variable for the height of the rhythm circles (NOTE::Really only needed so it can be referenced easily and not changed easily)
+	static int height = 50;
 	//Creates a variable for starting time of the circle (NOTE::Timer workings are unsure, but most likely start time in ms)
 	int startTime;
 	//Creates a variable to determine whether or not the circle is displayed and clickable
@@ -55,7 +53,7 @@ public class RhythmCircle
 		if (clickable)
 		{
 			//Check the distance between the circle center and the point passed is less than the radius of the circle through the distance formula (NOTE::Circle drawing is a little unclear, radius should be width/2 but unclear, and x and y are hopefully the center of the circle but also unclear)
-			if (Math.sqrt(Math.pow(clickPoint.x - (x + radius), 2) + Math.pow(clickPoint.y - (y + radius), 2)) < radius)//Math.sqrt(Math.pow(clickPoint.x - x, 2) + Math.pow(clickPoint.y - y, 2)) < width/2)
+			if (Math.sqrt(Math.pow(clickPoint.x - (x + width/2), 2) + Math.pow(clickPoint.y - (y + height/2), 2)) < width/2)//Math.sqrt(Math.pow(clickPoint.x - x, 2) + Math.pow(clickPoint.y - y, 2)) < width/2)
 			{
 				//clickPoint.x <= (x + width/2) && clickPoint.x >= (x + width/2) && clickPoint.y <= (y + height/2) && clickPoint.y >= (y + height/2)
 				//Set inside to true because the point is inside the circle
@@ -67,9 +65,10 @@ public class RhythmCircle
 		return inside;
 	}
 	
-	public void drawCircle(Graphics g)
+	public void drawCircle(Graphics2D g2d)
 	{
-		g.setColor(Color.blue);
-		g.fill(new Circle(x, y, radius));
+		
+		g2d.setPaint(Color.cyan);
+        g2d.fillOval(x, y, width, height);
 	}
 }

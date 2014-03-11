@@ -8,7 +8,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 
-import org.newdawn.slick.geom.Circle;
+import net.phys2d.raw.shapes.Circle;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -17,12 +17,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class MainRhythms extends BasicGame
 {
-	ArrayList<RhythmCircle> circles;
 	
     public MainRhythms()
     {
@@ -43,8 +44,11 @@ public class MainRhythms extends BasicGame
   
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
-    	RhythmCircle circle = new RhythmCircle(25, 25, 5, 5);
-    	circle.drawCircle(g);
+    	Circle circle = new Circle(5);
+    	
+    	circle.
+    	RhythmCircle circle = new RhythmCircle(10, 10, 5, 5);
+    	circle.drawCircle(g2d);
     	
     	//Turn off FPS counter in top left
     	//gc.setShowFPS(false);
