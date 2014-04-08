@@ -2,7 +2,7 @@
 |                           Bug list   			       |
 |							       |
 |DO NOT DELETE PAST BUGS (we can use the list for show at OGPC)|
-|       When committing include bugs fixed and bugs found       |
+|       When committing include bugs fixed and bugs found      |
 |--------------------------------------------------------------|
 please follow the format below
 Bug # - Number for the bug. In the format of 0_0_0 (zeros replaces from left to right with numbers up to 9) Ex. 0_0_1
@@ -36,3 +36,11 @@ Cause: Most likely repainting too quickly and so flickers every once in a while 
 Fix: Add an fps cap, goes along with figuring out how the timer works and capping the speed at which the timer can go.
 Priority: Medium. I have not seen it at home so it may be on only some computers. Might also fix itself with bug 0_0_2.
 Progress: The game was ported the slick graphics library so this bug is no longer applicable.
+
+Bug 0_0_4
+Version: V2.2
+What: Problems with detecting multiple keys at one time. Slick detects both keys at the same time, but the circles do not both pulse.
+Cause: Most likely because of the way the pulse is coded. It might be that the pulse is being highjacked by the other key as soon as the first one is registered. Could also be a problem with slick, which would be harder to fix.
+Fix: Make each radar circle have its own independent pulse counter and index. I have not done with because of the clutter it would cause, but it is one forseeable solution.
+Priority: Medium. Only needs to be worked on if we want chords to work. However, our game will work without chords, so it is somewhat of an extra feature. Simply to solve though, so it could easily be implemented.
+Progress: None. Found in class on 4/8/14
