@@ -64,7 +64,7 @@ public class MainRhythms extends BasicGame
     {
     	double deltaX1 = (screen_height/10 * 2) * Math.cos(1 * (Math.PI / 180));
 		double deltaY1 = (screen_height/10 * 2) * Math.sin(1 * (Math.PI / 180));
-    	test = new RhythmCircle(350, 450);
+    	test = new RhythmCircle(screen_width/2 + (float)deltaX1, screen_height/2 + (float)deltaY1);
     	double deltaX = (screen_height/10 * 5) * Math.cos(135 * (Math.PI / 180));
 		double deltaY = (screen_height/10 * 5) * Math.sin(135 * (Math.PI / 180));
     	test2 = new RhythmCircle(screen_width/2 + (float)deltaX, screen_height/2 + (float)deltaY);
@@ -108,7 +108,7 @@ public class MainRhythms extends BasicGame
     	debug.setUpdateTimes(gc.getTime());
     	
     	//Sets a variable which will grab input using slick libraries
-    	Input input = gc.getInput();
+    	final Input input = gc.getInput();
     	
     	//Checks to see if a special input key was pressed
     	if (specialInput.equals("`"))
@@ -167,9 +167,9 @@ public class MainRhythms extends BasicGame
     	//Draws a test circle (NOTE::Selector is passed to the draw function so that the circle can determine from the position of the selector when to start drawing)
     	for (int i = 0; i < circles.size(); i++)
     	{
-    		//circles.get(i).drawCircle(g, selector);
+    		circles.get(i).drawCircle(g, selector);
     	}
-    	test2.drawCircle(g, selector);
+    	//test2.drawCircle(g, selector);
     	
     	//Draws debug mode
     	debug.draw(g);

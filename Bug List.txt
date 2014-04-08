@@ -43,4 +43,4 @@ What: Problems with detecting multiple keys at one time. Slick detects both keys
 Cause: Most likely because of the way the pulse is coded. It might be that the pulse is being highjacked by the other key as soon as the first one is registered. Could also be a problem with slick, which would be harder to fix.
 Fix: Make each radar circle have its own independent pulse counter and index. I have not done with because of the clutter it would cause, but it is one forseeable solution.
 Priority: Medium. Only needs to be worked on if we want chords to work. However, our game will work without chords, so it is somewhat of an extra feature. Simply to solve though, so it could easily be implemented.
-Progress: None. Found in class on 4/8/14
+Progress: Fixed. Assigned each circle its own pulse radius which fixed the problem.
