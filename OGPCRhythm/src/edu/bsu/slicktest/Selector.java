@@ -35,20 +35,36 @@ public class Selector
 	}
 	
 	//Checks if the point passed in 180 degrees from the selectors current position
-	public boolean getPosition(int x, int y)
+	public boolean getPosition(float x, float y)
 	{
 		boolean across = false;
 		
-		float selectorX = (float)deltaX;
-		float selectorY = (float)deltaY;
+		float circleX = x - center_x;
+		float circleY = y - center_y;
 		
-		float circleX = center_x - x;
-		float circleY = center_y - y;
+		double circleAngle;
 		
-		if ((circleX/circleY) <= ((selectorX/selectorY) + .1) && (circleX/circleY) >= ((selectorX/selectorY) - .1))
-		{
+		if (circleY == 0 && circleX > 0)
+			circleAngle = 0;
+		else if (circleX == 0 && circleY > 0)
+			circleAngle = 90;
+		else if (circleY == 0 && circleX < 0)
+			circleAngle = 180;
+		else if (circleX == 0 && circleY < 0)
+			circleAngle = 270;
+		else
+			circleAngle = Math.atan(circleY/circleX) * (180/Math.PI);
+		
+		if (circleY > 0 && circleX < 0 || circleY < 0 && circleX < 0)
+			circleAngle += 180;
+		else if (circleY < 0 && circleX > 0)
+			circleAngle += 360;
+		
+		float check = angle + 180;
+		if (check >= 360)
+			check -= 360;
+		if (check <= circleAngle + .01 && check >= circleAngle - .01)
 			across = true;
-		}
 		
 		return across;
 	}

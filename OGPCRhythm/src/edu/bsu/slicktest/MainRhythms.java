@@ -39,9 +39,11 @@ public class MainRhythms extends BasicGame
 	String specialInput;
 	//Creates a music variable to hold the song that will be played (NOTE::This is temporary for testing rhythms)
 	Music song;
+	RadarCircles radar;
 	
 	//This is a test RhyhtmCircle that is drawn on the screen
-	RhythmCircle test = new RhythmCircle(350, 450, 0, 0);
+	RhythmCircle test;
+	RhythmCircle test2;
 	
     public MainRhythms()
     {
@@ -60,8 +62,16 @@ public class MainRhythms extends BasicGame
     @Override
     public void init(GameContainer gc) throws SlickException 
     {
+    	double deltaX1 = (screen_height/10 * 2) * Math.cos(1 * (Math.PI / 180));
+		double deltaY1 = (screen_height/10 * 2) * Math.sin(1 * (Math.PI / 180));
+    	test = new RhythmCircle(350, 450);
+    	double deltaX = (screen_height/10 * 5) * Math.cos(135 * (Math.PI / 180));
+		double deltaY = (screen_height/10 * 5) * Math.sin(135 * (Math.PI / 180));
+    	test2 = new RhythmCircle(screen_width/2 + (float)deltaX, screen_height/2 + (float)deltaY);
     	//Initializes an arraylist of RhythmCircles to be used for songs
     	circles = new ArrayList();
+    	circles.add(test);
+    	circles.add(test2);
     	//Initializes a the selector class, passing it the width and height of the screen
     	selector = new Selector(screen_width, screen_height);
     	//Initializes the debug class which will be used for testing render and update methods (NOTE::Could be used for other debug functions. Put anything that the player should not see, but could be useful in there)
@@ -70,6 +80,7 @@ public class MainRhythms extends BasicGame
     	specialInput = "";
     	//Initializes the music (NOTE::The path to the file where the music is located is sent as a string variable when initialized. Music class only supports two formats it seems. We will use wavs as those seem more common)
     	song = new Music("data/funkyw.wav");
+    	radar = new RadarCircles(screen_width, screen_height);
     	
     	//-----TESTING-----
     	//Testing to see if the music was loaded correctly and plays
@@ -79,14 +90,14 @@ public class MainRhythms extends BasicGame
     	song.play();
     	
     	//-----TESTING-----
-    	//int[][] data;
-    	//ReadSong read = new ReadSong("E:/Circles.txt");
-    	//try {
-		//	data = read.OpenFile();
-		//} catch (IOException e) {
-		//	// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+    	int[][] data;
+    	ReadSong read = new ReadSong("E:/Circles.txt");
+    	try {
+			data = read.OpenFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     //Updates the game state (NOTE::Normally called roughly ever 16 ms with slight fluctuation. To check time between updates on current machine activate debug mode with `)
@@ -108,6 +119,30 @@ public class MainRhythms extends BasicGame
     		specialInput = "";
     	}
     	
+    	if (input.isKeyPressed(Input.KEY_J))
+    	{
+    		radar.keyPressed('j');
+    	}
+    	
+    	if (input.isKeyPressed(Input.KEY_K))
+    	{
+    		radar.keyPressed('k');
+    	}
+    	
+    	if (input.isKeyPressed(Input.KEY_L))
+    	{
+    		radar.keyPressed('l');
+    	}
+    	
+    	if (input.isKeyPressed(Input.KEY_SEMICOLON))
+    	{
+    		radar.keyPressed(';');
+    	}
+    	
+    	if (input.isKeyPressed(Input.KEY_SPACE))
+    	{
+    		radar.keyPressed(' ');
+    	}
     	
     	//Example of how to use the built in slick input to detect input
     	/*if (input.isKeyPressed(Input.KEY_BACKSLASH))
@@ -117,6 +152,7 @@ public class MainRhythms extends BasicGame
     	
     	//Updates the selctors position
     	selector.updateSelector();
+    	radar.update();
     }
     
     //Renders the game
@@ -125,23 +161,21 @@ public class MainRhythms extends BasicGame
     	//Sends the current time in ms to the debug functions to determine the time between renders
     	debug.setRenderTimes(gc.getTime());
     	
-    	//Sets the drawing color to blue
-    	g.setColor(Color.blue);
-    	//Draws the five "radar" circles based on the screen width and height
-    	for (int i = 1; i <= 5; i++)
-    	{
-    		g.draw(new Circle(screen_width/2, screen_height/2, (screen_height/10) * i));
-    	}
-    	
-    	//Draw the selector
-    	selector.drawSelector(g);
+    	radar.draw(g);
     	
     	//-----Testing-----
     	//Draws a test circle (NOTE::Selector is passed to the draw function so that the circle can determine from the position of the selector when to start drawing)
-    	test.drawCircle(g, selector);
+    	for (int i = 0; i < circles.size(); i++)
+    	{
+    		//circles.get(i).drawCircle(g, selector);
+    	}
+    	test2.drawCircle(g, selector);
     	
     	//Draws debug mode
     	debug.draw(g);
+    	
+    	//Draw the selector
+    	selector.drawSelector(g);
     	
     	//Turn off FPS counter in top left
     	//gc.setShowFPS(false);
