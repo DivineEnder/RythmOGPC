@@ -3,6 +3,7 @@ package edu.bsu.slicktest;
 import java.awt.Point;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.geom.Circle;
@@ -19,16 +20,23 @@ public class RhythmCircle
 	private static int target_radius = 25;
 	//Creates a variable to determine whether or not the circle is displayed and clickable
 	private boolean clickable;
+	private float angle;
+	private int rotation;
+	private int layer;
+	
 	private int termination;
 	
 	
-	RhythmCircle(float px, float py)
+	RhythmCircle(float a, int r, int l, GameContainer gc)
 	{
 		//Initializes clickable to false since circles start out not shown
 		clickable = false;
 		//Initializes some variables to passed parameters to the class
-		x = px;
-		y = py;
+		angle = a;
+		rotation = r;
+		layer = l;
+		x = gc.getScreenWidth()/2 + (float)((gc.getScreenHeight()/10 * l) * Math.cos(angle * (Math.PI/180)));
+		y = gc.getScreenHeight()/2 + (float)((gc.getScreenHeight()/10 * l) * Math.sin(angle * (Math.PI/180)));
 		speed = .1;
 		termination = -1;
 	}
@@ -68,6 +76,11 @@ public class RhythmCircle
 		return inside;
 	}
 	
+	public int returnTermination()
+	{
+		return termination;
+	}
+	
 	public void smoothAppear()
 	{
 		if (currentRadius <= target_radius)
@@ -76,7 +89,7 @@ public class RhythmCircle
 	
 	public void drawCircle(Graphics g, Selector s)
 	{
-		if (s.getPosition(x, y) && termination != 1)
+		if (s.getPosition(angle, rotation) && termination != 1)
 			toggleClickable();
 		if (clickable)
 		{
@@ -85,6 +98,8 @@ public class RhythmCircle
 			g.setColor(Color.red);
 			//Fills a slick circle at the indicated x and y coordinates and with the given radius and the color set in the line above
 			g.fill(new Circle(x, y, (float)currentRadius));
+			if (s.passed(angle))
+				toggleClickable();
 		}
 	}
 }

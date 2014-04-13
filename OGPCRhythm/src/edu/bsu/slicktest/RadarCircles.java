@@ -34,15 +34,15 @@ public class RadarCircles
 	public void keyPressed(char key)
 	{
 		if (key == 'j')
-			pulseRadius.set(4, 5);
+			pulseRadius.set(4, 10);
 		else if (key == 'k')
-			pulseRadius.set(3, 5);
+			pulseRadius.set(3, 10);
 		else if (key == 'l')
-			pulseRadius.set(2, 5);
+			pulseRadius.set(2, 10);
 		else if (key == ';')
-			pulseRadius.set(1, 5);
+			pulseRadius.set(1, 10);
 		else if (key == ' ')
-			pulseRadius.set(0, 5);
+			pulseRadius.set(0, 10);
 	}
 	
 	public void update()
@@ -56,10 +56,8 @@ public class RadarCircles
 			
 	public void draw(Graphics g)
 	{
-		Color myAlphaColor = new Color(72,131,218,1);
 		//Sets the drawing color to blue
-		g.setColor(Color.blue);
-		//g.setColor(myAlphaColor);
+		g.setColor(Color.green);
     	//Draws the five "radar" circles based on the screen width and height
     	for (int i = 1; i <= 5; i++)
     	{

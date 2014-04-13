@@ -17,6 +17,7 @@ public class Selector
 	private float angle;
 	//Creates a variable to hold the speed that the angle changes
 	private double speed;
+	private int rotations;
 	
 	Selector(int w, int h)
 	{
@@ -32,48 +33,41 @@ public class Selector
 		angle = 0;
 		//Initializes the speed to roughly 31.25 degrees/second (NOTE::The speed is added to the angle each time updateSelector is called. Speed is in degrees/16 ms. 16 ms is determined by the time between updates loops [Check debug mode to find the time between updates for your current machine])
 		speed = 0.5; //degrees per 16 milliseconds
+		rotations = 0;
 	}
 	
 	//Checks if the point passed in 180 degrees from the selectors current position
-	public boolean getPosition(float x, float y)
+	public boolean getPosition(float circleAngle, int circleRotations)
 	{
 		boolean across = false;
-		
-		float circleX = x - center_x;
-		float circleY = y - center_y;
-		
-		double circleAngle;
-		
-		if (circleY == 0 && circleX > 0)
-			circleAngle = 0;
-		else if (circleX == 0 && circleY > 0)
-			circleAngle = 90;
-		else if (circleY == 0 && circleX < 0)
-			circleAngle = 180;
-		else if (circleX == 0 && circleY < 0)
-			circleAngle = 270;
-		else
-			circleAngle = Math.atan(circleY/circleX) * (180/Math.PI);
-		
-		if (circleY > 0 && circleX < 0 || circleY < 0 && circleX < 0)
-			circleAngle += 180;
-		else if (circleY < 0 && circleX > 0)
-			circleAngle += 360;
 		
 		float check = angle + 180;
 		if (check >= 360)
 			check -= 360;
-		if (check <= circleAngle + .01 && check >= circleAngle - .01)
+		if (check == circleAngle && rotations == circleRotations)
 			across = true;
 		
 		return across;
+	}
+	
+	public boolean passed(float circleAngle)
+	{
+		boolean passed = false;
+		
+		if (angle - 5 == circleAngle)
+			passed = true;
+		
+		return passed;
 	}
 
 	//Updates the selectors position by incrementing the angle by the speed and then calculating the new x and y coordinates using trig
 	public void updateSelector()
 	{
 		if (angle >= 360)
+		{
 			angle = 0;
+			rotations++;
+		}
 		else
 			angle+=speed;
 		deltaX = selector_length * Math.cos(angle * (Math.PI / 180));

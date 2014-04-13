@@ -1,5 +1,6 @@
 package edu.bsu.slicktest;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class Debug
@@ -50,6 +51,7 @@ public class Debug
 	{
 		if (debug_mode_on)
 		{
+			g.setColor(Color.green);
 			g.drawString("Time between updates: " + timesBetweenUpdates[timesBetweenUpdates.length - 1] + " ms", 10, 100);
 			g.drawString("Average time between updates: " + ((timesBetweenUpdates[0] + timesBetweenUpdates[1] + timesBetweenUpdates[2] + timesBetweenUpdates[3] + timesBetweenUpdates[4] + timesBetweenUpdates[5] + timesBetweenUpdates[6] + timesBetweenUpdates[7] + timesBetweenUpdates[8] + timesBetweenUpdates[9]) / timesBetweenUpdates.length) + " ms", 10, 115);
 			g.drawString("Time between renders: " + timesBetweenRenders[timesBetweenRenders.length - 1] + " ms", 10, 130);

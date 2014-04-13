@@ -44,6 +44,7 @@ public class MainRhythms extends BasicGame
 	//This is a test RhyhtmCircle that is drawn on the screen
 	RhythmCircle test;
 	RhythmCircle test2;
+	RhythmCircle test3;
 	
     public MainRhythms()
     {
@@ -62,16 +63,18 @@ public class MainRhythms extends BasicGame
     @Override
     public void init(GameContainer gc) throws SlickException 
     {
-    	double deltaX1 = (screen_height/10 * 2) * Math.cos(1 * (Math.PI / 180));
-		double deltaY1 = (screen_height/10 * 2) * Math.sin(1 * (Math.PI / 180));
-    	test = new RhythmCircle(screen_width/2 + (float)deltaX1, screen_height/2 + (float)deltaY1);
-    	double deltaX = (screen_height/10 * 5) * Math.cos(135 * (Math.PI / 180));
-		double deltaY = (screen_height/10 * 5) * Math.sin(135 * (Math.PI / 180));
-    	test2 = new RhythmCircle(screen_width/2 + (float)deltaX, screen_height/2 + (float)deltaY);
+    	//double deltaX1 = (screen_height/10 * 2) * Math.cos(1 * (Math.PI / 180));
+		//double deltaY1 = (screen_height/10 * 2) * Math.sin(1 * (Math.PI / 180));
+    	test = new RhythmCircle(45, 0, 5, gc);
+    	//double deltaX = (screen_height/10 * 5) * Math.cos(135 * (Math.PI / 180));
+		//double deltaY = (screen_height/10 * 5) * Math.sin(135 * (Math.PI / 180));
+    	test2 = new RhythmCircle(135, 1, 3, gc);
+    	test3 = new RhythmCircle(80, 1, 5, gc);
     	//Initializes an arraylist of RhythmCircles to be used for songs
     	circles = new ArrayList();
-    	circles.add(test);
-    	circles.add(test2);
+    	//circles.add(test);
+    	//circles.add(test2);
+    	//circles.add(test3);
     	//Initializes a the selector class, passing it the width and height of the screen
     	selector = new Selector(screen_width, screen_height);
     	//Initializes the debug class which will be used for testing render and update methods (NOTE::Could be used for other debug functions. Put anything that the player should not see, but could be useful in there)
@@ -87,17 +90,21 @@ public class MainRhythms extends BasicGame
     	//Sets the music volume to max
     	song.setVolume(1);
     	//Starts to play the song
-    	song.play();
+    	//song.play();
     	
     	//-----TESTING-----
-    	int[][] data;
-    	ReadSong read = new ReadSong("E:/Circles.txt");
+    	int[][] data = null;
+    	ReadSong read = new ReadSong("data/Circles.txt");
     	try {
 			data = read.OpenFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	for (int i = 0; i < data.length; i++)
+    	{
+    		circles.add(new RhythmCircle(data[i][0], data[i][1], data[i][2], gc));
+    	}
     }
     
     //Updates the game state (NOTE::Normally called roughly ever 16 ms with slight fluctuation. To check time between updates on current machine activate debug mode with `)
@@ -167,7 +174,10 @@ public class MainRhythms extends BasicGame
     	//Draws a test circle (NOTE::Selector is passed to the draw function so that the circle can determine from the position of the selector when to start drawing)
     	for (int i = 0; i < circles.size(); i++)
     	{
-    		circles.get(i).drawCircle(g, selector);
+    		if (circles.get(i).returnTermination() == 1)
+    			circles.remove(i);
+    		else
+    			circles.get(i).drawCircle(g, selector);
     	}
     	//test2.drawCircle(g, selector);
     	
