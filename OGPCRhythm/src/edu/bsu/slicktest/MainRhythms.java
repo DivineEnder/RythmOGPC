@@ -40,11 +40,7 @@ public class MainRhythms extends BasicGame
 	//Creates a music variable to hold the song that will be played (NOTE::This is temporary for testing rhythms)
 	Music song;
 	RadarCircles radar;
-	
-	//This is a test RhyhtmCircle that is drawn on the screen
-	RhythmCircle test;
-	RhythmCircle test2;
-	RhythmCircle test3;
+	int points = 0;
 	
     public MainRhythms()
     {
@@ -63,18 +59,8 @@ public class MainRhythms extends BasicGame
     @Override
     public void init(GameContainer gc) throws SlickException 
     {
-    	//double deltaX1 = (screen_height/10 * 2) * Math.cos(1 * (Math.PI / 180));
-		//double deltaY1 = (screen_height/10 * 2) * Math.sin(1 * (Math.PI / 180));
-    	test = new RhythmCircle(45, 0, 5, gc);
-    	//double deltaX = (screen_height/10 * 5) * Math.cos(135 * (Math.PI / 180));
-		//double deltaY = (screen_height/10 * 5) * Math.sin(135 * (Math.PI / 180));
-    	test2 = new RhythmCircle(135, 1, 3, gc);
-    	test3 = new RhythmCircle(80, 1, 5, gc);
     	//Initializes an arraylist of RhythmCircles to be used for songs
     	circles = new ArrayList();
-    	//circles.add(test);
-    	//circles.add(test2);
-    	//circles.add(test3);
     	//Initializes a the selector class, passing it the width and height of the screen
     	selector = new Selector(screen_width, screen_height);
     	//Initializes the debug class which will be used for testing render and update methods (NOTE::Could be used for other debug functions. Put anything that the player should not see, but could be useful in there)
@@ -129,6 +115,11 @@ public class MainRhythms extends BasicGame
     	if (input.isKeyPressed(Input.KEY_J))
     	{
     		radar.keyPressed('j');
+    		for (int i = 0; i < circles.size(); i++)
+    		{
+    			//if (circles.get(i) )
+    		}
+    		points++;
     	}
     	
     	if (input.isKeyPressed(Input.KEY_K))
@@ -179,7 +170,9 @@ public class MainRhythms extends BasicGame
     		else
     			circles.get(i).drawCircle(g, selector);
     	}
-    	//test2.drawCircle(g, selector);
+    	
+    	g.setColor(Color.red);
+    	g.drawString(Integer.toString(points), screen_width - 100, 10);
     	
     	//Draws debug mode
     	debug.draw(g);

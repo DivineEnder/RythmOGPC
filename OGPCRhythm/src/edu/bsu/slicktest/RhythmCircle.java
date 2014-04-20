@@ -55,25 +55,17 @@ public class RhythmCircle
 	}
 	
 	//Checks to see if the circle was clicked and returns true or false depending on whether it was or wasn't
-	public boolean checkClicked(Point clickPoint)
+	public boolean keyPressed(char key, int screen_height, Selector s)
 	{
-		//Creates and intializes a variable for whether or not the point passed is inside or outside the circle
-		boolean inside = false;
+		boolean hit = false;
+		float[] selectorPoint = new float[2];
 		
-		//Check to see if the circle is clickable first
-		if (clickable)
+		if (key == 'j')
 		{
-			//Check the distance between the circle center and the point passed is less than the radius of the circle through the distance formula (NOTE::Circle drawing is a little unclear, radius should be width/2 but unclear, and x and y are hopefully the center of the circle but also unclear)
-			if (Math.sqrt(Math.pow(clickPoint.x - (x + target_radius), 2) + Math.pow(clickPoint.y - (y + target_radius), 2)) < target_radius)//Math.sqrt(Math.pow(clickPoint.x - x, 2) + Math.pow(clickPoint.y - y, 2)) < width/2)
-			{
-				//clickPoint.x <= (x + width/2) && clickPoint.x >= (x + width/2) && clickPoint.y <= (y + height/2) && clickPoint.y >= (y + height/2)
-				//Set inside to true because the point is inside the circle
-				inside = true;
-			}
+			selectorPoint = s.returnPosition(screen_height);
 		}
 		
-		//Return whether or not the point is inside the circle in the form of a bool
-		return inside;
+		return hit;
 	}
 	
 	public int returnTermination()

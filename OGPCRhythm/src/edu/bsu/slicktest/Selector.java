@@ -1,5 +1,7 @@
 package edu.bsu.slicktest;
 
+import java.awt.Point;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
@@ -48,6 +50,16 @@ public class Selector
 			across = true;
 		
 		return across;
+	}
+	
+	public float[] returnPosition(int length)
+	{
+		float[] selectorPoint = new float[2];
+		
+		selectorPoint[0] = center_x + (float)deltaX;
+		selectorPoint[1] = center_y + (float)deltaY;
+		
+		return selectorPoint;
 	}
 	
 	public boolean passed(float circleAngle)
