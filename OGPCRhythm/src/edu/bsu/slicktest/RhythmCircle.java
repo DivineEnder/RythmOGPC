@@ -44,33 +44,65 @@ public class RhythmCircle
 	//Toggles whether the circle is clickable (NOTE::Could be done manually, but was easier to simply call the function so that you didn't have to screw around with other classes variables)
 	public void toggleClickable()
 	{
-		//If clickable is false then set to true
-		if (!clickable)
-			clickable = true;
-		//If clickable is true then set to false
-		else
-			clickable = false;
+		clickable = !clickable;
 		
 		termination++;
 	}
 	
 	//Checks to see if the circle was clicked and returns true or false depending on whether it was or wasn't
-	public boolean keyPressed(char key, int screen_height, Selector s)
+	public int keyPressed(char key, Selector s, int points)
 	{
-		boolean hit = false;
-		float[] selectorPoint = new float[2];
+		if (!clickable)
+			return points;
 		
-		if (key == 'j')
+		float selectorAngle = s.returnAngle();
+		float distance = Math.abs(selectorAngle - angle);
+		
+		if (key == 'j' && layer == 5)
 		{
-			selectorPoint = s.returnPosition(screen_height);
+			toggleClickable();
+			if (distance < 5)
+			{
+				currentRadius += 5;
+				points += Math.round(5 - distance);
+			}
+		}
+		if (key == 'k' && layer == 4)
+		{
+			toggleClickable();
+			if (distance < 5)
+				points += Math.round(5 - distance);
+		}
+		if (key == 'l' && layer == 3)
+		{
+			toggleClickable();
+			if (distance < 5)
+				points += Math.round(5 - distance);
+		}
+		if (key == ';' && layer == 2)
+		{
+			toggleClickable();
+			if (distance < 5)
+				points += Math.round(5 - distance);
+		}
+		if (key == ' ' && layer == 1)
+		{
+			toggleClickable();
+			if (distance < 5)
+				points += Math.round(5 - distance);
 		}
 		
-		return hit;
+		return points;
 	}
 	
 	public int returnTermination()
 	{
 		return termination;
+	}
+	
+	public int getLayer()
+	{
+		return layer;
 	}
 	
 	public void smoothAppear()

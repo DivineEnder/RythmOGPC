@@ -52,14 +52,9 @@ public class Selector
 		return across;
 	}
 	
-	public float[] returnPosition(int length)
-	{
-		float[] selectorPoint = new float[2];
-		
-		selectorPoint[0] = center_x + (float)deltaX;
-		selectorPoint[1] = center_y + (float)deltaY;
-		
-		return selectorPoint;
+	public float returnAngle()
+	{	
+		return angle;
 	}
 	
 	public boolean passed(float circleAngle)

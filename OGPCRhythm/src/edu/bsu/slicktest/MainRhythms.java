@@ -80,7 +80,7 @@ public class MainRhythms extends BasicGame
     	
     	//-----TESTING-----
     	int[][] data = null;
-    	ReadSong read = new ReadSong("data/Circles.txt");
+    	ReadSong read = new ReadSong("data/song.txt");
     	try {
 			data = read.OpenFile();
 		} catch (IOException e) {
@@ -117,29 +117,64 @@ public class MainRhythms extends BasicGame
     		radar.keyPressed('j');
     		for (int i = 0; i < circles.size(); i++)
     		{
-    			//if (circles.get(i) )
+    			if (circles.get(i).getLayer() == 5)
+    			{
+    				points = circles.get(i).keyPressed('j', selector, points);
+    				break;
+    			}
     		}
-    		points++;
     	}
     	
     	if (input.isKeyPressed(Input.KEY_K))
     	{
     		radar.keyPressed('k');
+    		for (int i = 0; i < circles.size(); i++)
+    		{
+    			if (circles.get(i).getLayer() == 4)
+    			{
+    				points = circles.get(i).keyPressed('k', selector, points);
+    				break;
+    			}
+    		}
     	}
     	
     	if (input.isKeyPressed(Input.KEY_L))
     	{
     		radar.keyPressed('l');
+    		for (int i = 0; i < circles.size(); i++)
+    		{
+    			if (circles.get(i).getLayer() == 3)
+    			{
+    				points = circles.get(i).keyPressed('l', selector, points);
+    				break;
+    			}
+    		}
     	}
     	
     	if (input.isKeyPressed(Input.KEY_SEMICOLON))
     	{
     		radar.keyPressed(';');
+    		for (int i = 0; i < circles.size(); i++)
+    		{
+    			if (circles.get(i).getLayer() == 2)
+    			{
+    				points = circles.get(i).keyPressed(';', selector, points);
+    				break;
+    			}
+    		}
     	}
     	
     	if (input.isKeyPressed(Input.KEY_SPACE))
     	{
     		radar.keyPressed(' ');
+    		for (int i = 0; i < circles.size(); i++)
+    		{
+    			if (circles.get(i).getLayer() == 1)
+    			{
+    				points = circles.get(i).keyPressed(' ', selector, points);
+    				break;
+    			}
+    		}
     	}
     	
     	//Example of how to use the built in slick input to detect input
@@ -156,6 +191,8 @@ public class MainRhythms extends BasicGame
     //Renders the game
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
+    	g.setAntiAlias(true);
+    	
     	//Sends the current time in ms to the debug functions to determine the time between renders
     	debug.setRenderTimes(gc.getTime());
     	

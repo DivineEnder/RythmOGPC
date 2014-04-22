@@ -44,3 +44,11 @@ Cause: Most likely because of the way the pulse is coded. It might be that the p
 Fix: Make each radar circle have its own independent pulse counter and index. I have not done with because of the clutter it would cause, but it is one forseeable solution.
 Priority: Medium. Only needs to be worked on if we want chords to work. However, our game will work without chords, so it is somewhat of an extra feature. Simply to solve though, so it could easily be implemented.
 Progress: Fixed. Assigned each circle its own pulse radius which fixed the problem.
+
+Bug 0_0_5
+Version: V2.4 (probably earlier as well)
+What: Circles flash when collision detection activates. Basically when a circle is terminated it seems that the circle being terminated and a couple of the others around that area flash.
+Cause: Not really sure. Something to do with drawing I would assume. I think it may be how I iterate through each circle, but not sure.
+Fix: My only guess is redo collision detection. Not really sure how though.
+Priority: Low. Only an annoyance really. Should be fixed if we have time and feel like trolling through the code to find the problem.
+Progress: None.
