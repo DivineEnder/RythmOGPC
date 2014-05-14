@@ -1,7 +1,5 @@
 package edu.bsu.slicktest;
 
-import java.awt.Point;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
@@ -52,9 +50,14 @@ public class Selector
 		return across;
 	}
 	
-	public float returnAngle()
+	public float getAngle()
 	{	
 		return angle;
+	}
+	
+	public int getRotations()
+	{
+		return rotations;
 	}
 	
 	public boolean passed(float circleAngle)

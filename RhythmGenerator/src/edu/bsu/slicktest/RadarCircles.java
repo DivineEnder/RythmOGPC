@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Line;
 
 public class RadarCircles
 {
@@ -33,15 +34,15 @@ public class RadarCircles
 	
 	public void keyPressed(char key)
 	{
-		if (key == 'j')
+		if (key == ' ')
 			pulseRadius.set(4, 10);
-		else if (key == 'k')
+		else if (key == 'h')
 			pulseRadius.set(3, 10);
-		else if (key == 'l')
+		else if (key == 'j')
 			pulseRadius.set(2, 10);
-		else if (key == ';')
+		else if (key == 'k')
 			pulseRadius.set(1, 10);
-		else if (key == ' ')
+		else if (key == 'l')
 			pulseRadius.set(0, 10);
 	}
 	
@@ -56,6 +57,12 @@ public class RadarCircles
 			
 	public void draw(Graphics g)
 	{
+		g.setColor(new Color(0, 255, 0, 64));
+    	for (int i = 0; i < 18; i++)
+    	{
+    		g.draw(new Line(center_x + (float) ((normal_radius * 5) * Math.cos(((i * 10) + 180) * (Math.PI / 180))), center_y + (float) ((normal_radius * 5) * Math.sin(((i * 10) + 180) * (Math.PI / 180))), center_x + (float) ((normal_radius * 5) * Math.cos((i * 10) * (Math.PI / 180))), center_y + (float) ((normal_radius * 5) * Math.sin((i * 10) * (Math.PI / 180)))));
+    	}
+		
 		//Sets the drawing color to blue
 		g.setColor(Color.green);
     	//Draws the five "radar" circles based on the screen width and height

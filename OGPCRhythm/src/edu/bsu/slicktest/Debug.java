@@ -1,6 +1,7 @@
 package edu.bsu.slicktest;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 public class Debug
@@ -41,21 +42,23 @@ public class Debug
 	
 	public void debugToggle()
 	{
-		if (debug_mode_on)
-			debug_mode_on = false;
-		else
-			debug_mode_on = true;
+		debug_mode_on = !debug_mode_on;
 	}
 	
-	public void draw(Graphics g)
+	public void draw(Graphics g, GameContainer gc)
 	{
 		if (debug_mode_on)
 		{
+			//Turn off FPS counter in top left
+	    	gc.setShowFPS(true);
+	    	
 			g.setColor(Color.green);
 			g.drawString("Time between updates: " + timesBetweenUpdates[timesBetweenUpdates.length - 1] + " ms", 10, 100);
 			g.drawString("Average time between updates: " + ((timesBetweenUpdates[0] + timesBetweenUpdates[1] + timesBetweenUpdates[2] + timesBetweenUpdates[3] + timesBetweenUpdates[4] + timesBetweenUpdates[5] + timesBetweenUpdates[6] + timesBetweenUpdates[7] + timesBetweenUpdates[8] + timesBetweenUpdates[9]) / timesBetweenUpdates.length) + " ms", 10, 115);
 			g.drawString("Time between renders: " + timesBetweenRenders[timesBetweenRenders.length - 1] + " ms", 10, 130);
 			g.drawString("Average time between renders: " + ((timesBetweenRenders[0] + timesBetweenRenders[1] + timesBetweenRenders[2] + timesBetweenRenders[3] + timesBetweenRenders[4] + timesBetweenRenders[5] + timesBetweenRenders[6] + timesBetweenRenders[7] + timesBetweenRenders[8] + timesBetweenRenders[9]) / timesBetweenRenders.length) + " ms", 10, 145);
 		}
+		else
+			gc.setShowFPS(false);
 	}
 }

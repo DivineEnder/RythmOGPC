@@ -1,11 +1,8 @@
 package edu.bsu.slicktest;
 
-import java.awt.Point;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.geom.Circle;
 
 public class RhythmCircle
@@ -23,6 +20,7 @@ public class RhythmCircle
 	private float angle;
 	private int rotation;
 	private int layer;
+	Color color = Color.red;
 	
 	private int termination;
 	
@@ -55,42 +53,19 @@ public class RhythmCircle
 		if (!clickable)
 			return points;
 		
-		float selectorAngle = s.returnAngle();
+		float selectorAngle = s.getAngle();
 		float distance = Math.abs(selectorAngle - angle);
 		
-		if (key == 'j' && layer == 5)
+		if (distance > 8)
+			points--;
+		if (distance < 8)
 		{
-			toggleClickable();
-			if (distance < 5)
-			{
-				currentRadius += 5;
-				points += Math.round(5 - distance);
-			}
+			color = Color.green;
+			points += Math.round(5 - distance);
 		}
-		if (key == 'k' && layer == 4)
-		{
-			toggleClickable();
-			if (distance < 5)
-				points += Math.round(5 - distance);
-		}
-		if (key == 'l' && layer == 3)
-		{
-			toggleClickable();
-			if (distance < 5)
-				points += Math.round(5 - distance);
-		}
-		if (key == ';' && layer == 2)
-		{
-			toggleClickable();
-			if (distance < 5)
-				points += Math.round(5 - distance);
-		}
-		if (key == ' ' && layer == 1)
-		{
-			toggleClickable();
-			if (distance < 5)
-				points += Math.round(5 - distance);
-		}
+		
+		if (points < 0)
+			points = 0;
 		
 		return points;
 	}
@@ -111,7 +86,7 @@ public class RhythmCircle
 			currentRadius += speed;
 	}
 	
-	public void drawCircle(Graphics g, Selector s)
+	public int drawCircle(Graphics g, Selector s, int points)
 	{
 		if (s.getPosition(angle, rotation) && termination != 1)
 			toggleClickable();
@@ -119,11 +94,19 @@ public class RhythmCircle
 		{
 			smoothAppear();
 			//Sets the drawing color for the circles
-			g.setColor(Color.red);
+			g.setColor(color);
 			//Fills a slick circle at the indicated x and y coordinates and with the given radius and the color set in the line above
 			g.fill(new Circle(x, y, (float)currentRadius));
 			if (s.passed(angle))
+			{
 				toggleClickable();
+				points--;
+			}
 		}
+		
+		if (points < 0)
+			points = 0;
+		
+		return points;
 	}
 }
